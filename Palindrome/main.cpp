@@ -92,6 +92,8 @@ public:
         newNodePtr->setData(data);
         newNodePtr->setNextNodePtr(0);
         prevNodePtr->setNextNodePtr(newNodePtr);
+        if(prevNodePtr!=headPtr)
+            newNodePtr->setPrevNodePtr(prevNodePtr);
         lastNodePtr->setPrevNodePtr(newNodePtr);
     }
     
@@ -218,7 +220,7 @@ public:
     bool palindromeTest(){
         Node* currentNodePtr=headPtr->getNextNodePtr();
         Node* lastNodePtr=tailPtr->getPrevNodePtr();
-        while (currentNodePtr!=0&&lastNodePtr!=0)
+        while (currentNodePtr!=0)
         {
             if(currentNodePtr->getData()==lastNodePtr->getData())
             {
@@ -244,14 +246,21 @@ int main()
      */
     string inputText;
     List palindromeList;
-    cout<<setprecision(20)<<"Palindrome!!!\n";
+    cout<<"Palindrome!!!\n";
     cout<<"Please Enter something to see whether it is a Palindrome or not!\n";
     getline(cin,inputText);
-    for (int i=0;i<inputText.length()-1;i++)
+    for (int i=0;i<inputText.length();i++)
     {
-        palindromeList.insert(char(inputText[i]));
+        palindromeList.insert(inputText[i]);
     }
-    cout<<"it is "<<palindromeList.palindromeTest();
+    if (palindromeList.palindromeTest()==1)
+    {
+        cout<<"It a Palindrome!"<<endl;
+    }
+    else
+    {
+        cout<<"I'm sorry, it's not a Palindrome!"<<endl;
+    }
     return 0;
 }
 
